@@ -1,0 +1,22 @@
+.equ max, 40
+.bss
+fib:.space 40
+
+
+.globl _start
+ .text
+_start:
+mov $0, %EAX
+mov $8, %EBX
+movl $0, fib
+movl $1, fib+4
+        while:
+                cmp $max, %EBX
+                jge endwhile
+                mov fib-8(%EBX), %EAX
+                add fib-4(%EBX), %EAX
+                mov %EAX, fib(%EBX) # fib to jest poprostu adres poczatku
+                add $4, %EBX
+        jmp while
+        endwhile:
+                 nop
