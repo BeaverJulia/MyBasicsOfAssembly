@@ -1,0 +1,18 @@
+.equ max, 40
+.bss
+tab: .space max
+etab.
+
+ .globl
+ .text
+_start:
+
+while cmp $(etab-tab)/4, %EBX
+        jge endwhile
+        mov %EBX, %EAX
+        mul %EAX
+        mov %EAX, tab( ,%EBX, 4)
+        inc %EBX
+jmp while
+endwhile:
+        nop
