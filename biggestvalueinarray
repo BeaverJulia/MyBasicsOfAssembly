@@ -1,0 +1,27 @@
+.data
+tab: .long 3, 6, 7, 2, 4, 1
+end_tab:
+.equ tab_bytes, end_tab-tab
+.global _start
+.text
+_start:
+        mov tab, %EAX #min
+        mov tab, %EBX #max
+        mov $0, %EDX #index
+while:
+        cmp $tab_bytes, %EDX
+        jge end_while
+
+        cmp %EAX, tab(%EDX) #compare actual with min
+        jge greater
+        mov tab(%EDX), %EAX
+
+        greater:
+        cmp %EBX, tab(%EDX)
+        jl move
+        mov tab(%EDX), %EBX
+        move:
+                add $4, %EDX
+                jmp while
+end_while:
+        nop
